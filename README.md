@@ -6,6 +6,7 @@
 
 2. Add the following to your `build.gradle`:
 
+	apply plugin:'scala'
 	buildscript {
 		dependencies {
 			classpath 'io.buhe.gradle:gatling:0.0.1'
