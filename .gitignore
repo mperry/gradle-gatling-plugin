@@ -1,10 +1,5 @@
-*.class
 
-# Package Files #
-*.jar
-*.war
-*.ear
-
-# Gradle temp directories #
-/.gradle
-/build
+.idea
+.gradle
+build
+*.iml
