@@ -6,7 +6,20 @@ import org.gradle.api.Project
 import java.util.regex.Pattern
 
 class GatlingPlugin implements Plugin<Project> {
-    private static Pattern createPattern(array) {
+
+    static String DEFAULT_PATTERN = ".*"
+
+    private static Pattern createPattern(String array) {
+        println("createPattern...")
+        createPattern1(array)
+    }
+
+    private static Pattern createPattern1(String array) {
+        println("createPattern1...")
+        Pattern.compile(array ?: DEFAULT_PATTERN)
+    }
+
+    private static Pattern createPattern2(String array) {
         if (!array) return null
         def list = Arrays.asList(array)
         if (list == null || list.size() == 0)
@@ -39,9 +52,9 @@ class GatlingPlugin implements Plugin<Project> {
         listPattern && listPattern.matcher(path).matches()
     }
 
-
     void apply(Project project) {
-        project.extensions.create("gatling", GatlingPluginExtension);
+        def e = project.extensions.create("gatling", GatlingPluginExtension);
+
 
         project.task('gatling').dependsOn("compileTestScala") << {
             println 'Include ' + project.gatling.include
@@ -64,17 +77,20 @@ class GatlingPlugin implements Plugin<Project> {
                                 .replace(File.separator, '.')
                         if(check(gatlingScenarioClass,blackListPattern,whiteListPattern)){
                             logger.debug("Tranformed file ${file} into scenario class ${gatlingScenarioClass}")
-                            project.javaexec {
-                                // I do not use this so
-                                main = 'com.excilys.ebi.gatling.app.Gatling'
-                                classpath = project.sourceSets.test.output + project.sourceSets.test.runtimeClasspath
-                                report = project.buildDir.getAbsolutePath()+'/reports/gatling';
-                                args  '-sbf',
-                                        project.sourceSets.test.output.classesDir,
-                                        '-s',
-                                        gatlingScenarioClass,
-                                        '-rf',
-                                        report
+                            if (!e.dryRun) {
+                                project.javaexec {
+                                    // I do not use this so
+                                    main = 'com.excilys.ebi.gatling.app.Gatling'
+                                    classpath = project.sourceSets.test.output + project.sourceSets.test.runtimeClasspath
+                                    def report = project.buildDir.getAbsolutePath()+'/reports/gatling';
+                                    args  '-sbf',
+                                            project.sourceSets.test.output.classesDir,
+                                            '-s',
+                                            gatlingScenarioClass,
+                                            '-rf',
+                                            report
+                                }
+
                             }
                         }
                     }

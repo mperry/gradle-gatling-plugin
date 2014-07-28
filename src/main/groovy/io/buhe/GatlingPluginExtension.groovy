@@ -6,6 +6,13 @@ package io.buhe
  * Time: 9:29 AM
  */
 class GatlingPluginExtension {
-    def  include = null;
-    def  exclude = null;
+
+    String include
+    String exclude
+    Boolean list = true
+    Boolean dryRun = false
+
+    boolean doTests() {
+        !list
+    }
 }

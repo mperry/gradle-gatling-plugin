@@ -1,12 +1,19 @@
+
 apply plugin: 'groovy'
 apply plugin: 'maven'
-
-version = '0.0.2-SNAPSHOT'
-group = 'io.buhe.gradle'
-archivesBaseName = 'gatling'
 apply plugin: 'idea'
 
-repositories.mavenCentral()
+ext {
+
+}
+
+version = "0.1-SNAPSHOT"
+group = "com.github.mperry"
+archivesBaseName = "gatling"
+
+repositories{
+    mavenCentral()
+}
 
 dependencies {
     compile gradleApi()
@@ -17,8 +24,6 @@ uploadArchives {
         repository(url: 'file:../lib')
     }
 }
-
-
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
