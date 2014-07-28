@@ -5,7 +5,10 @@ apply plugin: 'idea'
 
 ext {
 
+    gatlingVersion = "1.5.6"
 }
+
+defaultTasks "build"
 
 version = "0.1-SNAPSHOT"
 group = "com.github.mperry"
@@ -13,10 +16,21 @@ archivesBaseName = "gatling"
 
 repositories{
     mavenCentral()
+    maven {
+        url "https://oss.sonatype.org/content/groups/public"
+    }
+    maven {
+        url 'http://repository.excilys.com/content/groups/public'
+    }
+
 }
 
 dependencies {
     compile gradleApi()
+    compile "org.functionaljava:functionaljava:4.2-SNAPSHOT"
+    compile "com.excilys.ebi.gatling:gatling-app:$gatlingVersion"
+    compile "com.excilys.ebi.gatling.highcharts:gatling-charts-highcharts:$gatlingVersion"
+
 }
 
 uploadArchives {
