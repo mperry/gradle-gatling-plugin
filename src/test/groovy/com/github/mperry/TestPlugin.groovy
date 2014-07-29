@@ -1,10 +1,9 @@
 package com.github.mperry
 
-import fj.data.IO
-import groovy.transform.TypeChecked
 import com.github.mperry.gatling.GatlingPlugin
 import com.github.mperry.gatling.GatlingPluginExtension
-//import org.apache.log4j.Logger
+import fj.data.IO
+import groovy.transform.TypeChecked
 import org.junit.Assert
 import org.junit.Test
 import org.slf4j.LoggerFactory

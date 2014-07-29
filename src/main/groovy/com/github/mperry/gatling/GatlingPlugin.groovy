@@ -16,9 +16,6 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.file.FileCollection
 import org.slf4j.Logger
-
-//import org.gradle.api.logging.Logger
-
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
@@ -93,20 +90,13 @@ class GatlingPlugin implements Plugin<Project> {
     }
 
     static void apply(GatlingPluginExtension g, Logger logger, String testClassesDir, F<String, IO<Unit>> perform) {
-//            logger.info("Gatling configuration: $g, testClassesDir: $testClassesDir, report: $reportPath")
             logger.info("Gatling configuration: $g, testClassesDir: $testClassesDir")
-
-//            logger.info("Include ${g.include}")
-//            logger.info("Exclude " + g.exclude)
-
             def v = V.v(g.exclude, g.include).map { String s -> createPattern(Option.fromNull(s)) }
             def cDir = new File(testClassesDir)
             def found = cDir.exists() && cDir.isDirectory()
             if (!found) {
                 logger.info("Gatling test directory not found: ${cDir}")
             } else {
-//                logger.info("Executing all Gatling scenarios from: $cDir")
-
                 def io1 = IOFunctions.map(listRecursively(Paths.get(cDir.absolutePath)), { List<Path> list ->
                     def list2 = list.collect { Path p ->
                         manglePath(p.toFile(), cDir)
@@ -123,8 +113,6 @@ class GatlingPlugin implements Plugin<Project> {
                             }
                             if (doTest(p._2()) && !g.dryRun) {
                                 perform.f(p._1()).run()
-//                                run(p._1(), reportPath, testClassesDir)
-//                                runChild()
                             }
                             Unit.unit()
                         } as IO<Unit>
@@ -134,11 +122,8 @@ class GatlingPlugin implements Plugin<Project> {
                 })
                 def io2 = IOFunctions.join(io1)
                 io2.run()
-
                 logger.info("Finished Gatling scenarios.")
             }
-
-
     }
 
     void apply(Project project) {
@@ -150,9 +135,7 @@ class GatlingPlugin implements Plugin<Project> {
                 { ->
                     runChild(project, clazz, classpath(project), testClassesDir(project).absolutePath, reportPath(project))
                 } as IO<Unit>
-
             })
-
         }
     }
 
@@ -164,11 +147,9 @@ class GatlingPlugin implements Plugin<Project> {
     @TypeChecked(TypeCheckingMode.SKIP)
     static void runChild(Project project, String gatlingScenarioClass, FileCollection javaClasspath, String testClassesDirectory, String reportPath) {
         project.javaexec {
-            // I do not use this so
             main = 'com.excilys.ebi.gatling.app.Gatling'
             classpath = javaClasspath
             args '-sbf', testClassesDirectory, '-s', gatlingScenarioClass, '-rf', reportPath
-//            args '-sbf', testClassesDir(project), '-s', gatlingScenarioClass, '-rf', reportPath
         }
     }
 
@@ -181,9 +162,7 @@ class GatlingPlugin implements Plugin<Project> {
     }
 
     static void run(String gatlingScenarioClass, String reportPath, String testClassesDir) {
-
         Gatling.main(['-sbf', testClassesDir, '-s', gatlingScenarioClass, '-rf', reportPath] as String[])
-//        Gatling.main(['-s', gatlingScenarioClass, '-rf', reportPath] as String[])
     }
 
 }
