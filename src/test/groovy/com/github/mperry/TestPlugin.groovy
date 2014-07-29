@@ -28,7 +28,7 @@ class TestPlugin {
 
     @Test
     void test2() {
-        def e = new GatlingPluginExtension(dryRun: true, list: true, include: "com.github.mperry.scenario.*")
+        def e = new GatlingPluginExtension(dryRun: false, list: true, include: "com.github.mperry.scenario.*")
         def logger = LoggerFactory.getLogger(this.class)
         def mainDir1 = "/Users/mperry/repositories/gradle-gatling-plugin"
         def test1 = "$mainDir1/build/classes/test"
