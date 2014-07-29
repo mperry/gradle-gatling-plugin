@@ -30,23 +30,15 @@ class TestPlugin {
     void test2() {
         def e = new GatlingPluginExtension(dryRun: true, list: true, include: "com.github.mperry.scenario.*")
         def logger = LoggerFactory.getLogger(this.class)
-
-        def mainDir = ""
         def mainDir1 = "/Users/mperry/repositories/gradle-gatling-plugin"
-        def mainDir2 = "/Users/mperry/repositories/gatling-first"
-
         def test1 = "$mainDir1/build/classes/test"
-        def test2 = "$mainDir2/build/classes/test"
-//        def test = test1
-        def report = "./mark-report"
+        def report = "./reports"
 
         GatlingPlugin.apply(e, logger, test1, { String clazz ->
             { ->
                 GatlingPlugin.run(clazz, report, test1)
-            } as IO<Unit>
-
+            } as IO
         })
-
     }
 
 }

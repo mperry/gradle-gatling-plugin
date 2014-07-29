@@ -146,7 +146,7 @@ class GatlingPlugin implements Plugin<Project> {
         def g = (GatlingPluginExtension) project.extensions.create("gatling", GatlingPluginExtension);
         def logger = logger(project)
 
-        project.task('gatling').dependsOn("compileTestScala") << {
+        project.task('gatlingRun').dependsOn("compileTestScala") << {
             apply(g, logger, testClassesDir(project).absolutePath, { String clazz ->
                 { ->
                     runChild(project, clazz, classpath(project), testClassesDir(project).absolutePath, reportPath(project))
