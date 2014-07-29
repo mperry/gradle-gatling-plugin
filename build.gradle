@@ -1,11 +1,12 @@
 
 apply plugin: 'groovy'
+apply plugin: 'scala'
 apply plugin: 'maven'
 apply plugin: 'idea'
 
 ext {
-
     gatlingVersion = "1.5.6"
+    scalaVersion = "2.9.3"
 }
 
 defaultTasks "build"
@@ -22,14 +23,20 @@ repositories{
     maven {
         url 'http://repository.excilys.com/content/groups/public'
     }
-
 }
 
 dependencies {
     compile gradleApi()
     compile "org.functionaljava:functionaljava:4.2-SNAPSHOT"
+    compile("com.github.mperry:functionalgroovy-main:0.6-SNAPSHOT") {
+        exclude module: "groovy-all"
+    }
     compile "com.excilys.ebi.gatling:gatling-app:$gatlingVersion"
     compile "com.excilys.ebi.gatling.highcharts:gatling-charts-highcharts:$gatlingVersion"
+
+    testCompile "org.scala-lang:scala-compiler:$scalaVersion"
+    testCompile "org.scala-lang:scala-library:$scalaVersion"
+
 
 }
 

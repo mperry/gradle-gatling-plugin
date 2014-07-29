@@ -1,5 +1,7 @@
 package io.buhe
 
+import groovy.transform.Canonical
+import groovy.transform.Immutable
 import groovy.transform.TypeChecked
 
 /**
@@ -8,14 +10,15 @@ import groovy.transform.TypeChecked
  * Time: 9:29 AM
  */
 @TypeChecked
+@Canonical
 class GatlingPluginExtension {
 
-    String include
-    String exclude
+    String include = null
+    String exclude = null
     Boolean list = true
     Boolean dryRun = false
 
     boolean doTests() {
-        !list
+        !dryRun
     }
 }
