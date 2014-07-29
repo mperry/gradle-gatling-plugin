@@ -1,4 +1,4 @@
-package io.buhe
+package com.github.mperry.gatling
 
 import groovy.transform.Canonical
 import groovy.transform.Immutable

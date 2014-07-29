@@ -1,11 +1,9 @@
 package com.github.mperry
 
-import com.excilys.ebi.gatling.app.Gatling
-import fj.Unit
 import fj.data.IO
 import groovy.transform.TypeChecked
-import io.buhe.GatlingPlugin
-import io.buhe.GatlingPluginExtension
+import com.github.mperry.gatling.GatlingPlugin
+import com.github.mperry.gatling.GatlingPluginExtension
 //import org.apache.log4j.Logger
 import org.junit.Assert
 import org.junit.Test

@@ -1,4 +1,4 @@
-package io.buhe
+package com.github.mperry.gatling
 
 import com.excilys.ebi.gatling.app.Gatling
 import com.github.mperry.fg.ListFJExtension
@@ -9,7 +9,6 @@ import fj.Unit
 import fj.data.IO
 import fj.data.IOFunctions
 import fj.data.Option
-import fj.data.Validation
 import fj.data.vector.V
 import groovy.transform.TypeChecked
 import groovy.transform.TypeCheckingMode
