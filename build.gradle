@@ -3,15 +3,41 @@ apply plugin: 'groovy'
 apply plugin: 'scala'
 apply plugin: 'maven'
 
+Boolean doSigning() {
+	signingEnabled.trim() == "true"
+}
+
+String createVersion(String base, Boolean isSnapshot) {
+	base + (isSnapshot ? "-SNAPSHOT" : "")
+}
+
 ext {
     gatlingVersion = "1.5.6"
+	baseVersion = "0.1"
+	isSnapshot = true
+
+	projectArtifactName = "gradle-gatling-plugin"
+	projectTitle = "Gatling Gradle Plugin"
+	projectDescription = "A Gatling plugin for Gradle"
+	projectUrl = "https://github.com/mperry/gradle-gatling-plugin"
+	scmUrl = "https://github.com/mperry/gradle-gatling-plugin.git"
+
+	founder = "Mark Perry"
+	founderUsername = "mperry"
+
+	sonatypeBaseUrl = "https://oss.sonatype.org"
+	sonatypeSnapshotUrl = "$sonatypeBaseUrl/content/repositories/snapshots/"
+	sonatypeRepositoryUrl = "$sonatypeBaseUrl/content/groups/public"
+	sonatypeReleaseUrl = "$sonatypeBaseUrl/service/local/staging/deploy/maven2/"
+	sonatypeUploadUrl = isSnapshot ? sonatypeSnapshotUrl : sonatypeReleaseUrl
+
 }
 
 defaultTasks "build"
 
-version = "0.1-SNAPSHOT"
+version = createVersion(baseVersion, isSnapshot)
 group = "com.github.mperry"
-archivesBaseName = "gatling"
+archivesBaseName = projectArtifactName
 
 repositories{
     mavenCentral()
@@ -21,7 +47,7 @@ repositories{
 
 dependencies {
     compile gradleApi()
-    compile "org.functionaljava:functionaljava:4.2-SNAPSHOT"
+    compile "org.functionaljava:functionaljava:4.2-beta-1-SNAPSHOT"
     compile("com.github.mperry:functionalgroovy-main:0.6-SNAPSHOT") {
         exclude module: "groovy-all"
     }
@@ -32,3 +58,50 @@ dependencies {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.0'
 }
+
+uploadArchives {
+	enabled = true
+	repositories {
+		mavenDeployer {
+			if (doSigning()) {
+				beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+			}
+
+			repository(url: sonatypeUploadUrl) {
+				authentication(userName: sonatypeUsername, password: sonatypePassword)
+			}
+			pom {
+				groupId = project.group
+				project {
+					name projectTitle
+					packaging 'jar'
+					description projectDescription
+					url projectUrl
+					organization {
+						name projectTitle
+						url projectUrl
+					}
+					scm {
+						url scmUrl
+					}
+					licenses {
+						license {
+							name 'The Apache Software License, Version 2.0'
+							url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+							distribution 'repo'
+						}
+					}
+					developers {
+						developer {
+							id project.founderUsername
+							name project.founder
+						}
+
+					}
+				}
+			}
+		}
+	}
+
+}
+
