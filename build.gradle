@@ -1,4 +1,14 @@
 
+
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath("com.ofg:uptodate-gradle-plugin:0.0.3")
+	}
+}
+
 apply plugin: 'groovy'
 apply plugin: 'scala'
 apply plugin: 'maven'
