@@ -26,6 +26,9 @@ class GatlingPlugin implements Plugin<Project> {
 
     static enum ListStatus { WHITE, BLACK, NEITHER, BOTH }
     static String DEFAULT_PATTERN = ".*"
+    static String BINARY_FILE = "-bf"
+    static String SCENARIO_CLASS = "-s"
+    static String REPORT_PATH = "-rf"
 
     static Pattern createPattern(Option<String> o) {
         Pattern.compile(o.orSome(DEFAULT_PATTERN))
@@ -149,7 +152,7 @@ class GatlingPlugin implements Plugin<Project> {
         project.javaexec {
             main = 'io.gatling.app.Gatling'
             classpath = javaClasspath
-            args '-bf', testClassesDirectory, '-s', gatlingScenarioClass, '-rf', reportPath
+            args BINARY_FILE, testClassesDirectory, SCENARIO_CLASS, gatlingScenarioClass, REPORT_PATH, reportPath
         }
     }
 
@@ -162,7 +165,7 @@ class GatlingPlugin implements Plugin<Project> {
     }
 
     static void run(String gatlingScenarioClass, String reportPath, String testClassesDir) {
-        Gatling.main(['-bf', testClassesDir, '-s', gatlingScenarioClass, '-rf', reportPath] as String[])
+        Gatling.main([BINARY_FILE, testClassesDir, SCENARIO_CLASS, gatlingScenarioClass, REPORT_PATH, reportPath] as String[])
     }
 
 }

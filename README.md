@@ -55,7 +55,6 @@ apply plugin: "com.github.mperry.gatling"
 defaultTasks "build"
 
 ext {
-    gatlingVersion = "2.0.1"
 }
 
 repositories {
