@@ -41,12 +41,11 @@ An example build.gradle file is below:
 ```
 buildscript {
     repositories {
-        mavenCentral()
-        maven { url 'http://repository.excilys.com/content/groups/public' }
+        jcenter()
         maven { url "https://oss.sonatype.org/content/groups/public" }
     }
     dependencies {
-        classpath "com.github.mperry:gradle-gatling-plugin:0.1-SNAPSHOT"
+        classpath "com.github.mperry:gradle-gatling-plugin:0.2-SNAPSHOT"
     }
 }
 
@@ -56,16 +55,13 @@ apply plugin: "com.github.mperry.gatling"
 defaultTasks "build"
 
 ext {
-    gatlingVersion = "1.5.6"
+    gatlingVersion = "2.0.1"
 }
 
 repositories {
-    mavenCentral()
-    maven { url 'http://repository.excilys.com/content/groups/public' }
+    jcenter()
     maven { url "https://oss.sonatype.org/content/groups/public" }
-    mavenLocal()
 }
-
 
 gatling {
     list true
@@ -77,10 +73,16 @@ gatling {
 test.dependsOn gatlingRun
 
 dependencies {
-    compile "com.github.mperry:gradle-gatling-plugin:0.1-SNAPSHOT"
+    compile "com.github.mperry:gradle-gatling-plugin:0.2-SNAPSHOT"
 }
 
 ```
+
+# Versions
+
+Plugin version:
+* 0.1-SNAPSHOT: Support Gatling 1.5.6
+* 0.2-SNAPSHOT: Support Gatling 2.0.1
 
 # License 
 
