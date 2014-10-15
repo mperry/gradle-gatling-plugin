@@ -27,13 +27,13 @@ class TestPlugin {
     void test2() {
         def e = new GatlingPluginExtension(dryRun: false, list: true, include: "com.github.mperry.scenario.*")
         def logger = LoggerFactory.getLogger(this.class)
-        def mainDir1 = "/Users/mperry/repositories/gradle-gatling-plugin"
-        def test1 = "$mainDir1/build/classes/test"
-        def report = "./reports"
+        def mainDir = "/Users/mperry/repositories/gradle-gatling-plugin"
+        def testDir = "$mainDir/build/classes/test"
+        def report = "$mainDir/reports"
 
-        GatlingPlugin.apply(e, logger, test1, { String clazz ->
+        GatlingPlugin.apply(e, logger, testDir, { String clazz ->
             { ->
-                GatlingPlugin.run(clazz, report, test1)
+                GatlingPlugin.run(clazz, report, testDir)
             } as IO
         })
     }

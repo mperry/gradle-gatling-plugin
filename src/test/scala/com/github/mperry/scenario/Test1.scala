@@ -1,7 +1,6 @@
 package com.github.mperry.scenario
 
 import io.gatling.core.Predef._
-//import bootstrap._
 import io.gatling.http.Predef._
 
 class Test1 extends Simulation {
@@ -11,7 +10,7 @@ class Test1 extends Simulation {
     .acceptHeader("application/json")
 
   val testScn = scenario("test")
-    .repeat(10) {
+    .repeat(5) {
     exec(http("hello world").get("/"))
   }
 
