@@ -86,3 +86,7 @@ Plugin version:
 # License 
 
 Licensed under [Apache Version 2](https://www.apache.org/licenses/LICENSE-2.0.html).
+
+# References
+
+This project was originally inspired and forked from the repo https://github.com/buhe/gradle-gatling-plugin.
