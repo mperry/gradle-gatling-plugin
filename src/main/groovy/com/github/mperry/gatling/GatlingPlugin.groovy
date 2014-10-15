@@ -149,7 +149,7 @@ class GatlingPlugin implements Plugin<Project> {
         project.javaexec {
             main = 'io.gatling.app.Gatling'
             classpath = javaClasspath
-            args '-sbf', testClassesDirectory, '-s', gatlingScenarioClass, '-rf', reportPath
+            args '-bf', testClassesDirectory, '-s', gatlingScenarioClass, '-rf', reportPath
         }
     }
 
