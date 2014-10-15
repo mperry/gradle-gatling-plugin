@@ -17,7 +17,7 @@ class TestServlet extends GroovyServlet {
     static int count = 0
 
     void service(HttpServletRequest request, HttpServletResponse response) {
-        Thread.sleep(new Random().nextInt(2000))
+        Thread.sleep(new Random().nextInt(1000))
         count++
         println("New request i: $count request: ${request}")
         response.getWriter().write('<h1>hello world</h1>')
