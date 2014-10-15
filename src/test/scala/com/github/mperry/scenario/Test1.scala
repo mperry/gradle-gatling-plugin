@@ -1,13 +1,13 @@
 package com.github.mperry.scenario
 
-import com.excilys.ebi.gatling.core.Predef._
-import com.excilys.ebi.gatling.core.Predef.bootstrap._
-import com.excilys.ebi.gatling.http.Predef._
+import io.gatling.core.Predef._
+//import bootstrap._
+import io.gatling.http.Predef._
 
 class Test1 extends Simulation {
 
-  val httpProtocol = httpConfig
-    .baseURL("http://localhost:8094/gatling-with-gradle")
+  val httpConf = http
+    .baseURL("http://localhost:8094/server")
     .acceptHeader("application/json")
 
   val testScn = scenario("test")
@@ -15,5 +15,5 @@ class Test1 extends Simulation {
     exec(http("hello world").get("/"))
   }
 
-  setUp(testScn.users(2).protocolConfig(httpProtocol))
+  setUp(testScn.inject(atOnceUsers(2)).protocols(httpConf))
 }

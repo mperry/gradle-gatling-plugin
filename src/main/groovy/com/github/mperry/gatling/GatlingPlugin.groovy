@@ -1,6 +1,6 @@
 package com.github.mperry.gatling
 
-import com.excilys.ebi.gatling.app.Gatling
+import io.gatling.app.Gatling
 import com.github.mperry.fg.ListFJExtension
 import com.github.mperry.fg.ListJavaExtension
 import fj.F
@@ -147,7 +147,7 @@ class GatlingPlugin implements Plugin<Project> {
     @TypeChecked(TypeCheckingMode.SKIP)
     static void runChild(Project project, String gatlingScenarioClass, FileCollection javaClasspath, String testClassesDirectory, String reportPath) {
         project.javaexec {
-            main = 'com.excilys.ebi.gatling.app.Gatling'
+            main = 'io.gatling.app.Gatling'
             classpath = javaClasspath
             args '-sbf', testClassesDirectory, '-s', gatlingScenarioClass, '-rf', reportPath
         }
@@ -162,7 +162,7 @@ class GatlingPlugin implements Plugin<Project> {
     }
 
     static void run(String gatlingScenarioClass, String reportPath, String testClassesDir) {
-        Gatling.main(['-sbf', testClassesDir, '-s', gatlingScenarioClass, '-rf', reportPath] as String[])
+        Gatling.main(['-bf', testClassesDir, '-s', gatlingScenarioClass, '-rf', reportPath] as String[])
     }
 
 }

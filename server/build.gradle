@@ -14,8 +14,8 @@ apply plugin: 'jetty'
 defaultTasks "build"
 
 ext {
-	startPort = 8095
-	stopPort = 8096
+	startPort = 8094
+	stopPort = 8095
 	stopKey = "stopKey"
 }
 
@@ -29,7 +29,7 @@ repositories {
 // In this section you declare the dependencies for your production and test code
 dependencies {
     // We use the latest groovy 2.x version for building this library
-    compile 'org.codehaus.groovy:groovy-all:2.3.3'
+    compile 'org.codehaus.groovy:groovy-all:2.3.6'
 
 	compile "javax.servlet:javax.servlet-api:3.1.0"
 	compile 'org.eclipse.jetty.aggregate:jetty-all-server:8.1.15.v20140411'

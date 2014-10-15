@@ -22,8 +22,8 @@ String createVersion(String base, Boolean isSnapshot) {
 }
 
 ext {
-    gatlingVersion = "1.5.6"
-	baseVersion = "0.1"
+    gatlingVersion = "2.0.1"
+	baseVersion = "0.2"
 	isSnapshot = true
 
 	projectArtifactName = "gradle-gatling-plugin"
@@ -62,8 +62,8 @@ dependencies {
     compile("com.github.mperry:functionalgroovy-main:0.6") {
         exclude module: "groovy-all"
     }
-    compile "com.excilys.ebi.gatling:gatling-app:$gatlingVersion"
-    compile "com.excilys.ebi.gatling.highcharts:gatling-charts-highcharts:$gatlingVersion"
+    compile "io.gatling:gatling-app:$gatlingVersion"
+    compile "io.gatling.highcharts:gatling-charts-highcharts:$gatlingVersion"
 }
 
 task wrapper(type: Wrapper) {
