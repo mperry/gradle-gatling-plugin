@@ -23,8 +23,8 @@ String createVersion(String base, Boolean isSnapshot) {
 }
 
 ext {
-    gatlingVersion = "2.0.1"
-	baseVersion = "0.2"
+    gatlingVersion = "2.1.7"
+	baseVersion = "0.3"
 	isSnapshot = true
 
 	projectArtifactName = "gradle-gatling-plugin"
@@ -60,8 +60,8 @@ repositories{
 
 dependencies {
     compile gradleApi()
-    compile "org.functionaljava:functionaljava:4.2-beta-1"
-    compile("com.github.mperry:functionalgroovy-main:0.6") {
+    compile "org.functionaljava:functionaljava:4.4"
+    compile("com.github.mperry:functionalgroovy-main:0.8") {
         exclude module: "groovy-all"
     }
     compile "io.gatling:gatling-app:$gatlingVersion"
