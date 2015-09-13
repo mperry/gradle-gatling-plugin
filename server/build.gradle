@@ -1,11 +1,9 @@
 
+// run Gretty server with `gradle appRun`
+
 apply plugin: 'groovy'
-//apply plugin: 'jetty'
-
-
 apply plugin: 'war'
 apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
-//apply plugin: "gretty"
 
 defaultTasks "build"
 
@@ -23,23 +21,4 @@ repositories {
 dependencies {
     compile "org.codehaus.groovy:groovy-all:$groovyVersion"
 	compile "javax.servlet:javax.servlet-api:3.1.0"
-//	compile 'org.eclipse.jetty.aggregate:jetty-all-server:8.1.15.v20140411'
-
-//    classpath "org.akhikhl.gretty:gretty:1.2.4"
-
 }
-
-//jettyRun {
-//	scanIntervalSeconds = 1
-//	httpPort = project.startPort
-//	stopPort = project.stopPort
-//	stopKey = project.stopKey
-//	daemon = false
-//}
-//
-//jettyStop {
-//	stopKey= project.stopKey
-//	stopPort = project.stopPort
-//}
-
-
